@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DLC Sports — Score Card</title>
+  <meta name="description" content="DLC Sports tournament scoring: team sizes, brackets, and winner / runner-up points by game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c1117;
+      --surface: #151c26;
+      --surface-2: #1a2332;
+      --border: #2a3544;
+      --text: #e8edf4;
+      --muted: #8b9cb3;
+      --accent: #3d9eff;
+      --accent-dim: rgba(61, 158, 255, 0.12);
+      --gold: #f0c14b;
+      --silver: #a8b4c4;
+      --radius: 12px;
+      --shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(61, 158, 255, 0.18), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(240, 193, 75, 0.06), transparent),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(61, 158, 255, 0.25);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: Outfit, "DM Sans", sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead {
+      background: var(--surface-2);
+    }
+
+    th {
+      font-family: Outfit, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    th.num {
+      text-align: right;
+    }
+
+    tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    tbody tr:not(:last-child) td {
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    td {
+      padding: 1rem 1.25rem;
+      vertical-align: middle;
+    }
+
+    td.game {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    td.meta {
+      color: var(--muted);
+    }
+
+    td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+
+    td.winner {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    td.runner {
+      color: var(--silver);
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 1.75rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      th, td {
+        padding: 0.85rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="badge">Points reference</span>
+      <h1>DLC Sports Score Card</h1>
+      <p class="subtitle">Team format and placement points for each game</p>
+    </header>
+
+    <div class="card">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Game</th>
+              <th scope="col">Team size</th>
+              <th scope="col">Total teams</th>
+              <th scope="col" class="num">Winner points</th>
+              <th scope="col" class="num">Runner-up points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="game">Cricket</td>
+              <td class="meta">6 players</td>
+              <td class="meta">15 teams</td>
+              <td class="num winner">140</td>
+              <td class="num runner">70</td>
+            </tr>
+            <tr>
+              <td class="game">Futsal</td>
+              <td class="meta">6 players</td>
+              <td class="meta">10 teams</td>
+              <td class="num winner">140</td>
+              <td class="num runner">70</td>
+            </tr>
+            <tr>
+              <td class="game">Table tennis</td>
+              <td class="meta">4 players</td>
+              <td class="meta">16 teams</td>
+              <td class="num winner">80</td>
+              <td class="num runner">40</td>
+            </tr>
+            <tr>
+              <td class="game">Foosball</td>
+              <td class="meta">2 players</td>
+              <td class="meta">30 teams</td>
+              <td class="num winner">50</td>
+              <td class="num runner">25</td>
+            </tr>
+            <tr>
+              <td class="game">Padel</td>
+              <td class="meta">2 players</td>
+              <td class="meta">20 teams</td>
+              <td class="num winner">60</td>
+              <td class="num runner">30</td>
+            </tr>
+            <tr>
+              <td class="game">Badminton</td>
+              <td class="meta">2 players</td>
+              <td class="meta">20 teams</td>
+              <td class="num winner">60</td>
+              <td class="num runner">30</td>
+            </tr>
+            <tr>
+              <td class="game">Carrom</td>
+              <td class="meta">2 players</td>
+              <td class="meta">12 teams</td>
+              <td class="num winner">40</td>
+              <td class="num runner">20</td>
+            </tr>
+            <tr>
+              <td class="game">Chess</td>
+              <td class="meta">1 player</td>
+              <td class="meta">20 players</td>
+              <td class="num winner">50</td>
+              <td class="num runner">25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      DLC Sports · Score card
+    </footer>
+  </div>
+</body>
+</html>
